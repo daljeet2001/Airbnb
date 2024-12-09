@@ -9,6 +9,7 @@ const listingSchema=new Schema({
     description:String,
     image:{
      type:String,
+     default:"https://unsplash.com/photos/white-house-under-maple-trees-1ddol8rgUH8",
      set:(v)=>v===""? "https://unsplash.com/photos/white-house-under-maple-trees-1ddol8rgUH8":v,
     },
     price:Number,
@@ -16,5 +17,5 @@ const listingSchema=new Schema({
     country:String,
 });
 
-const Listing=mongoose.model("Listing,listingSchema");
-modules.export=Listing;
+const Listing=mongoose.model("Listing",listingSchema);
+module.exports=Listing;
