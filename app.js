@@ -5,6 +5,7 @@ const Listing=require("./models/listing.js");
 const path=require("path");
 const MONGO_url="mongodb://127.0.0.1:27017/wanderlust";
 const methodOverride=require("method-override");
+const ejsMate=require("ejs-mate");
 
 main().then(()=>{
     console.log("connected to DB");
@@ -20,6 +21,8 @@ app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
+app.engine("ejs",ejsMate);
+app.use(express.static(path.join(__dirname,"/public")));
 
 app.get("/",(req,res)=>{
     res.send("Hi I am robot");
@@ -80,5 +83,12 @@ app.put("/listings/:id",async(req,res)=>{
 
 });
 
+//Delete Route
+app.delete("/listings/:id",async(req,res)=>{
+    let {id}=req.params;
+    let deletedListing=await Listing.findByIdAndDelete(id);
+    console.log(deletedListing);
+    res.redirect("/listings");
+});
 
 //daljeet singh mahal
