@@ -9,9 +9,8 @@ const listingSchema=new Schema({
     },
     description:String,
     image:{
-     type:String,
-     default:"https://unsplash.com/photos/white-house-under-maple-trees-1ddol8rgUH8",
-     set:(v)=>v===""? "https://unsplash.com/photos/white-house-under-maple-trees-1ddol8rgUH8":v,
+    url:String,
+    filename:String,
     },
     price:Number,
     location:String,
