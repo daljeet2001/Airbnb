@@ -6,7 +6,7 @@ const express=require("express");
 const app=express();
 const mongoose=require("mongoose");
 const path=require("path");
-//const MONGO_url="mongodb://127.0.0.1:27017/wanderlust";
+
 const dbUrl=process.env.ATLASDB_URL;
 const methodOverride=require("method-override");
 const ejsMate=require("ejs-mate");
@@ -44,7 +44,7 @@ app.use(express.static(path.join(__dirname,"/public")));
 const store=MongoStore.create({
     mongoUrl:dbUrl,
     crypto:{
-        secret:"mysupersecretcode"
+        secret:process.env.SECRET,
     },
     touchAfter:24*3600,
 });
